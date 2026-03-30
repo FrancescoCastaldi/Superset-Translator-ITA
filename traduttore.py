@@ -1,6 +1,5 @@
 import polib
 import requests
-import re
 import time
 
 def translate_google(text):
@@ -35,7 +34,7 @@ def translate_po_file(input_file, output_file):
                     entry.flags.remove('fuzzy')
                 count += 1
                 print(f"✓ {count}/{total} - '{msgid}'")
-                time.sleep(0.1)  # evita rate limit
+                time.sleep(0.1)
             except Exception as e:
                 print(f"✗ Errore: {entry.msgid[:50]}...")
         else:
