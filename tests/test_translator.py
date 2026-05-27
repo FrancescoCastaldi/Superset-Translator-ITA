@@ -9,7 +9,7 @@ import polib
 from translator.translator import translate_po_file
 
 
-def _make_po_file(entries: list[dict]) -> str:
+def _make_po_file(entries: list[dict]) -> str:  # noqa: UP006
     """Create a temporary .po file and return its path."""
     po = polib.POFile()
     po.metadata = {"Content-Type": "text/plain; charset=UTF-8"}

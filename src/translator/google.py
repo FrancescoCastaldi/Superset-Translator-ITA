@@ -23,8 +23,7 @@ def translate_google(
 ) -> str:
     """Translate text using the Google Translate unofficial API.
 
-    Technical terms are protected from translation via placeholder
-    substitution. Falls back to the original text on any error.
+    Falls back to the original text on any error.
 
     Args:
         text: The English source string.
@@ -43,7 +42,9 @@ def translate_google(
         "q": protected_text,
     }
     try:
-        resp = requests.get(_TRANSLATE_URL, params=params, timeout=_DEFAULT_TIMEOUT)
+        resp = requests.get(  # noqa: S113
+            _TRANSLATE_URL, params=params, timeout=_DEFAULT_TIMEOUT
+        )
         resp.raise_for_status()
         translated: str = resp.json()[0][0][0]
         translated = restore_technical_terms(translated, placeholders)

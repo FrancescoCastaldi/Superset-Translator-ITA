@@ -20,7 +20,7 @@ class TestProtectTechnicalTerms:
 
     def test_case_insensitive(self) -> None:
         protected, _ = protect_technical_terms("use the api endpoint")
-        assert "api" not in protected.lower() or "__TECH_" in protected
+        assert "__TECH_" in protected
 
 
 class TestRestoreTechnicalTerms:
@@ -28,7 +28,6 @@ class TestRestoreTechnicalTerms:
         original = "Configure the OAuth token via API"
         protected, placeholders = protect_technical_terms(original)
         restored = restore_technical_terms(protected, placeholders)
-        # Every original term must appear in restored text
         for term in ["OAuth", "API"]:
             assert term in restored
 

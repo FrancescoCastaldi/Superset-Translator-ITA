@@ -1,8 +1,8 @@
-"""Superset PO Translator — public API."""
+"""Superset PO Translator - public API."""
 
-from .translator import translate_po_file
-from .protection import protect_technical_terms, restore_technical_terms
 from .google import translate_google
+from .protection import protect_technical_terms, restore_technical_terms
+from .translator import translate_po_file
 
 __all__ = [
     "translate_po_file",

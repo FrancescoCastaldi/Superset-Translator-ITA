@@ -25,7 +25,7 @@ class TestTranslateGoogle:
     def test_technical_terms_preserved(self) -> None:
         mock_response = MagicMock()
         mock_response.json.return_value = [
-            [[["Controlla __TECH_0__ docs", "Check API docs"]]]
+            [["Controlla __TECH_0__ docs", "Check API docs"]]
         ]
         mock_response.raise_for_status = MagicMock()
 

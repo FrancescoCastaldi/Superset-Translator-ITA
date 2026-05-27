@@ -62,9 +62,6 @@ TECHNICAL_TERMS: list[str] = [
 def protect_technical_terms(text: str) -> tuple[str, dict[str, str]]:
     """Replace technical terms with placeholders.
 
-    Args:
-        text: The original source string.
-
     Returns:
         A tuple of (protected_text, placeholders_mapping).
     """
@@ -80,15 +77,7 @@ def protect_technical_terms(text: str) -> tuple[str, dict[str, str]]:
 
 
 def restore_technical_terms(text: str, placeholders: dict[str, str]) -> str:
-    """Restore original technical terms from placeholders.
-
-    Args:
-        text: Translated text containing placeholders.
-        placeholders: Mapping returned by protect_technical_terms.
-
-    Returns:
-        Text with placeholders replaced by original terms.
-    """
+    """Restore original technical terms from placeholders."""
     restored = text
     for placeholder, term in placeholders.items():
         restored = restored.replace(placeholder, term)
@@ -96,14 +85,7 @@ def restore_technical_terms(text: str, placeholders: dict[str, str]) -> str:
 
 
 def capitalize_sentences(text: str) -> str:
-    """Capitalize the first letter of each sentence.
-
-    Args:
-        text: Input string, possibly multi-sentence.
-
-    Returns:
-        String with every sentence capitalized.
-    """
+    """Capitalize the first letter of each sentence."""
     sentences = re.split(r"(?<=[.!?])\s+", text.strip())
     capitalized = []
     for sentence in sentences:
