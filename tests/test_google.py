@@ -17,9 +17,7 @@ class TestTranslateGoogle:
         assert result == "Ciao mondo"
 
     def test_falls_back_on_network_error(self) -> None:
-        with patch(
-            "translator.google.requests.get", side_effect=ConnectionError
-        ):
+        with patch("translator.google.requests.get", side_effect=ConnectionError):
             result = translate_google("Hello world")
 
         assert result == "Hello world"
@@ -34,5 +32,4 @@ class TestTranslateGoogle:
         with patch("translator.google.requests.get", return_value=mock_response):
             result = translate_google("Check API docs")
 
-        # API term should be restored
         assert "API" in result

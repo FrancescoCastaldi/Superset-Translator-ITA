@@ -1,15 +1,15 @@
 """Google Translate unofficial API client.
 
-Uses the free `gtx` endpoint — no API key required.
+Uses the free `gtx` endpoint - no API key required.
 Rate-limiting is handled by the caller via sleep intervals.
 """
 
 import requests
 
 from .protection import (
+    capitalize_sentences,
     protect_technical_terms,
     restore_technical_terms,
-    capitalize_sentences,
 )
 
 _TRANSLATE_URL = "https://translate.googleapis.com/translate_a/single"
@@ -43,9 +43,7 @@ def translate_google(
         "q": protected_text,
     }
     try:
-        resp = requests.get(
-            _TRANSLATE_URL, params=params, timeout=_DEFAULT_TIMEOUT
-        )
+        resp = requests.get(_TRANSLATE_URL, params=params, timeout=_DEFAULT_TIMEOUT)
         resp.raise_for_status()
         translated: str = resp.json()[0][0][0]
         translated = restore_technical_terms(translated, placeholders)

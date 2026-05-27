@@ -31,23 +31,17 @@ class TestTranslatePoFile:
         input_path = _make_po_file([{"msgid": "Save", "msgstr": ""}])
         output_path = input_path.replace(".po", "_out.po")
 
-        with patch(
-            "translator.translator.translate_google", return_value="Salva"
-        ):
+        with patch("translator.translator.translate_google", return_value="Salva"):
             translate_po_file(input_path, output_path)
 
         result = polib.pofile(output_path)
         assert result[0].msgstr == "Salva"
 
     def test_skips_already_translated(self) -> None:
-        input_path = _make_po_file(
-            [{"msgid": "Save", "msgstr": "Salva"}]
-        )
+        input_path = _make_po_file([{"msgid": "Save", "msgstr": "Salva"}])
         output_path = input_path.replace(".po", "_out.po")
 
-        with patch(
-            "translator.translator.translate_google"
-        ) as mock_translate:
+        with patch("translator.translator.translate_google") as mock_translate:
             translate_po_file(input_path, output_path)
 
         mock_translate.assert_not_called()
@@ -58,9 +52,7 @@ class TestTranslatePoFile:
         )
         output_path = input_path.replace(".po", "_out.po")
 
-        with patch(
-            "translator.translator.translate_google", return_value="Salva"
-        ):
+        with patch("translator.translator.translate_google", return_value="Salva"):
             translate_po_file(input_path, output_path)
 
         result = polib.pofile(output_path)
@@ -70,9 +62,7 @@ class TestTranslatePoFile:
         input_path = _make_po_file([{"msgid": "Hello", "msgstr": ""}])
         output_path = input_path.replace(".po", "_out.po")
 
-        with patch(
-            "translator.translator.translate_google", return_value="Ciao"
-        ):
+        with patch("translator.translator.translate_google", return_value="Ciao"):
             translate_po_file(input_path, output_path)
 
         assert Path(output_path).exists()

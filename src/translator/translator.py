@@ -27,15 +27,9 @@ def _translate_entry(entry: polib.POEntry, count: int, total: int) -> None:
         _translate_singular_entry(entry, count, total)
 
 
-def _translate_singular_entry(
-    entry: polib.POEntry, count: int, total: int
-) -> None:
+def _translate_singular_entry(entry: polib.POEntry, count: int, total: int) -> None:
     if not entry.msgstr or "fuzzy" in entry.flags:
-        preview = (
-            entry.msgid[:50] + "..."
-            if len(entry.msgid) > 50
-            else entry.msgid
-        )
+        preview = entry.msgid[:50] + "..." if len(entry.msgid) > 50 else entry.msgid
         translated = translate_google(entry.msgid)
         entry.msgstr = translated
         if "fuzzy" in entry.flags:
@@ -46,9 +40,7 @@ def _translate_singular_entry(
         print(f"  - {count}/{total} - Already translated")
 
 
-def _translate_plural_entry(
-    entry: polib.POEntry, count: int, total: int
-) -> None:
+def _translate_plural_entry(entry: polib.POEntry, count: int, total: int) -> None:
     forms_to_translate: dict[int, str] = {
         0: entry.msgid,
         1: entry.msgid_plural,
@@ -72,11 +64,7 @@ def _translate_plural_entry(
             translated = translate_google(source_text)
             entry.msgstr_plural[idx] = translated
             label = "singular" if idx == 0 else f"plural[{idx}]"
-            preview = (
-                source_text[:50] + "..."
-                if len(source_text) > 50
-                else source_text
-            )
+            preview = source_text[:50] + "..." if len(source_text) > 50 else source_text
             print(f"    ↳ [{label}] '{preview}' → '{translated[:50]}'")
             time.sleep(_SLEEP_INTERVAL)
 
