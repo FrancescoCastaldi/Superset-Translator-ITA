@@ -1,22 +1,21 @@
 # Superset PO Translator
 
-[![CI](https://github.com/FrancescoCastaldi/Superset-Translator-ITA/actions/workflows/ci.yml/badge.svg)](https://github.com/FrancescoCastaldi/Superset-Translator-ITA/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/FrancescoCastaldi/Superset-Translator-ITA/graph/badge.svg)](https://codecov.io/gh/FrancescoCastaldi/Superset-Translator-ITA)
+[![CI](https://github.com/FrancescoCastaldi/Superset-Translator-ITA/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/FrancescoCastaldi/Superset-Translator-ITA/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/FrancescoCastaldi/Superset-Translator-ITA/graph/badge.svg?token=CODECOV_TOKEN)](https://codecov.io/gh/FrancescoCastaldi/Superset-Translator-ITA)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Code style: ruff-format](https://img.shields.io/badge/code%20style-ruff--format-orange)](https://github.com/astral-sh/ruff)
 
-Automated English → Italian translator for Apache Superset `.po` translation files.  
-Uses the Google Translate free API, protects technical terms from being altered, and removes `fuzzy` flags automatically.
+Automated **English → Italian** translator for Apache Superset `.po` translation files.  
+Uses the free Google Translate API, protects technical terms from mistranslation, and removes `fuzzy` flags automatically.
 
 ---
 
 ## Features
 
 - Translates all untranslated and `fuzzy`-flagged entries
-- Protects technical terms (API, SQL, JWT, OAuth, …) from mistranslation
-- Handles both singular and plural PO forms
+- Protects technical terms (`API`, `SQL`, `JWT`, `OAuth`, …) from being altered
+- Handles both **singular** and **plural** PO forms
 - Rate-limited requests to avoid Google Translate throttling
 - Clean CLI with configurable input/output paths
 
@@ -38,6 +37,8 @@ superset-po-translator/
 │   └── test_google.py
 ├── scripts/
 │   └── run.py                # CLI entry-point
+├── examples/
+│   └── messages.po           # Sample PO file for testing
 ├── .github/workflows/
 │   └── ci.yml                # Lint + test + coverage
 ├── pyproject.toml            # Build, deps, tooling config
@@ -64,17 +65,17 @@ pip install -e ".[dev]"            # include dev tools (ruff, mypy, pytest)
 
 ## Usage
 
-### Basic
+### Translate a PO file
 
 ```bash
-# Translate messages.po → messages_it.po (defaults)
+# Default: messages.po → messages_it.po
 python scripts/run.py
 
 # Custom input/output paths
 python scripts/run.py path/to/input.po path/to/output_it.po
 ```
 
-### With a fresh Superset clone
+### Use with a Superset clone
 
 ```bash
 cp /path/to/superset/superset/translations/it/LC_MESSAGES/messages.po .
@@ -103,7 +104,7 @@ Done!
 # Run tests
 pytest tests/ -v
 
-# Lint & format
+# Lint & format check
 ruff format src tests scripts
 ruff check src tests scripts
 
@@ -117,18 +118,18 @@ mypy src/translator
 
 | Module | Responsibility |
 |---|---|
-| `translator.py` | Orchestrates PO file I/O and entry iteration |
-| `protection.py` | Placeholder substitution for technical terms |
-| `google.py` | HTTP client for Google Translate free API |
-| `scripts/run.py` | CLI entry-point, argument parsing |
+| `src/translator/translator.py` | Orchestrates PO file I/O and entry iteration |
+| `src/translator/protection.py` | Placeholder substitution for technical terms |
+| `src/translator/google.py` | HTTP client for Google Translate free API |
+| `scripts/run.py` | CLI entry-point with argument parsing |
 
 ---
 
 ## Limitations
 
 - Uses the **unofficial** Google Translate endpoint (`gtx`) — no API key needed but may be rate-limited on large files (>10k strings)
-- Machine translations should be reviewed before merging into production
-- Sleep interval of 0.1 s per request; full Superset translation file (~4500 strings) takes ~10 minutes
+- Machine translations should be **reviewed manually** before merging into production
+- Sleep interval of 0.1 s per request; full Superset translation (~4500 strings) takes ~10 minutes
 
 ---
 
@@ -136,7 +137,7 @@ mypy src/translator
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/my-feature`
-3. Commit your changes following [Conventional Commits](https://www.conventionalcommits.org/)
+3. Commit following [Conventional Commits](https://www.conventionalcommits.org/)
 4. Push and open a Pull Request against `main`
 
 ---

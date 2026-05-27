@@ -1,0 +1,18 @@
+# Example PO file for testing the translator.
+# Copy your real Superset messages.po here before running.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Save"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Dashboard"
+msgstr ""
+
+msgid "Add a filter"
+msgstr ""

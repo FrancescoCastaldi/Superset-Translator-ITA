@@ -1,11 +1,11 @@
 [build-system]
 requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "superset-po-translator"
 version = "1.0.0"
-description = "Automated English→Italian PO file translator for Apache Superset"
+description = "Automated English to Italian PO file translator for Apache Superset"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [
@@ -24,11 +24,7 @@ dev = [
     "ruff>=0.4",
     "mypy>=1.10",
     "types-requests",
-    "types-polib",
 ]
-
-[project.scripts]
-po-translate = "translator.translator:translate_po_file"
 
 [tool.setuptools.packages.find]
 where = ["src"]
